@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Untuk Seseorang yang Pernah Kucintai</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    :root{
+      --bg1:#070707;
+      --bg2:#120810;
+      --bg3:#2a0f1f;
+      --rose:#ff6b9d;
+      --soft:#ffd6e3;
+      --glass:rgba(255,255,255,.10);
+      --border:rgba(255,255,255,.18);
+      --text:#ffffff;
+      --muted:#d8c9cf;
+    }
+
+    html{
+      scroll-behavior:smooth;
+      -webkit-text-size-adjust:100%;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      min-height:100vh;
+      width:100%;
+      overflow-x:hidden;
+      background:
+        radial-gradient(circle at top, #3b1025 0%, transparent 35%),
+        linear-gradient(180deg,var(--bg3) 0%, var(--bg2) 45%, var(--bg1) 100%);
+      color:var(--text);
+      position:relative;
+      padding:20px 16px 120px;
+    }
+
+    /* ===== BINTANG ===== */
+    .stars{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      overflow:hidden;
+    }
+
+    .star{
+      position:absolute;
+      width:2px;
+      height:2px;
+      background:white;
+      border-radius:50%;
+      animation:twinkle 3s infinite ease-in-out;
+      opacity:.8;
+    }
+
+    @keyframes twinkle{
+      0%,100%{opacity:.2;transform:scale(.8);}
+      50%{opacity:1;transform:scale(1.6);}
+    }
+
+    /* ===== CONTAINER ===== */
+    .container{
+      position:relative;
+      z-index:2;
+      width:100%;
+      max-width:650px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:24px;
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .hero-card{
+      width:100%;
+      background:var(--glass);
+      border:1px solid var(--border);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-radius:32px;
+      padding:42px 28px;
+      box-shadow:0 12px 40px rgba(0,0,0,.45);
+      animation:pop .9s ease;
+    }
+
+    @keyframes pop{
+      from{transform:scale(.92);opacity:0;}
+      to{transform:scale(1);opacity:1;}
+    }
+
+    h1{
+      font-size:clamp(28px,7vw,44px);
+      line-height:1.2;
+      margin-bottom:16px;
+      font-weight:700;
+    }
+
+    .subtitle{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.8;
+      width:100%;
+      overflow-wrap:break-word;
+    }
+
+    /* ===== KARTU ===== */
+    .card{
+      width:100%;
+      background:var(--glass);
+      border:1px solid var(--border);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border-radius:28px;
+      padding:24px 22px;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      opacity:0;
+      transform:translateY(28px);
+      transition:all .8s ease;
+    }
+
+    .card.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:14px;
+      font-size:18px;
+      font-weight:600;
+    }
+
+    .section-title span{
+      font-size:22px;
+    }
+
+    /* ===== TEKS CHAT ===== */
+    .chat{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      width:100%;
+    }
+
+    .bubble{
+      max-width:92%;
+      padding:14px 16px;
+      border-radius:22px;
+      line-height:1.8;
+      font-size:15px;
+      overflow-wrap:break-word;
+      word-break:normal;
+      white-space:pre-wrap;
+      width:fit-content;
+      animation:pop .6s ease;
+    }
+
+    .me{
+      align-self:flex-end;
+      background:linear-gradient(135deg,#ff5f95,#ff8bb2);
+      color:#fff;
+      border-bottom-right-radius:8px;
+    }
+
+    .you{
+      align-self:flex-start;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
+      border-bottom-left-radius:8px;
+    }
+
+    /* ===== TYPEWRITER ===== */
+    .typewriter{
+      width:100%;
+      min-height:120px;
+      color:#fff;
+      line-height:1.95;
+      font-size:15px;
+      overflow-wrap:break-word;
+      white-space:pre-wrap;
+    }
+
+    .cursor{
+      display:inline-block;
+      width:2px;
+      height:1em;
+      background:#fff;
+      margin-left:2px;
+      animation:blink .8s infinite;
+      vertical-align:middle;
+    }
+
+    @keyframes blink{
+      50%{opacity:0;}
+    }
+
+    /* ===== COUNTDOWN ===== */
+    .countdown{
+      text-align:center;
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .count-number{
+      font-size:40px;
+      font-weight:700;
+      color:var(--soft);
+      line-height:1;
+    }
+
+    .count-label{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* ===== SURAT ===== */
+    .letter-wrapper{
+      text-align:center;
+    }
+
+    .letter-btn{
+      background:linear-gradient(135deg,#ff6b9d,#ff8fb8);
+      color:#fff;
+      border:none;
+      padding:14px 24px;
+      border-radius:999px;
+      font-family:'Poppins',sans-serif;
+      font-weight:600;
+      cursor:pointer;
+      transition:.25s ease;
+      box-shadow:0 8px 20px rgba(255,107,157,.35);
+    }
+
+    .letter-btn:hover{
+      transform:translateY(-2px) scale(1.02);
+    }
+
+    .letter{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .8s ease, margin-top .5s ease;
+      text-align:left;
+    }
+
+    .letter.open{
+      max-height:900px;
+      margin-top:22px;
+    }
+
+    .letter-content{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:24px;
+      padding:24px;
+      line-height:2;
+      color:#f8eef2;
+      overflow-wrap:break-word;
+      white-space:pre-wrap;
+    }
+
+    /* ===== AKHIR ===== */
+    .ending{
+      text-align:center;
+      padding:28px 22px;
+    }
+
+    .ending h2{
+      font-size:clamp(24px,6vw,34px);
+      margin-bottom:14px;
+      line-height:1.3;
+    }
+
+    .ending p{
+      color:#f5e8ee;
+      line-height:2;
+      overflow-wrap:break-word;
+    }
+
+    /* ===== TOMBOL ===== */
+    .buttons{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+      margin-top:22px;
+    }
+
+    .action-btn{
+      width:100%;
+      border:none;
+      border-radius:20px;
+      padding:16px 20px;
+      font-family:'Poppins',sans-serif;
+      font-weight:600;
+      font-size:15px;
+      cursor:pointer;
+      transition:.25s ease;
+    }
+
+    .heal{
+      background:linear-gradient(135deg,#ffffff,#f3f3f3);
+      color:#111;
+    }
+
+    .love{
+      background:linear-gradient(135deg,#ff4d7a,#ff1744);
+      color:#fff;
+    }
+
+    .action-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    /* ===== HASIL ===== */
+    .result{
+      display:none;
+      margin-top:18px;
+      padding:22px;
+      border-radius:24px;
+      line-height:1.9;
+      text-align:center;
+      overflow-wrap:break-word;
+      animation:pop .6s ease;
+    }
+
+    .result.show{
+      display:block;
+    }
+
+    .heal-result{
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 0 40px rgba(255,255,255,.12);
+    }
+
+    .love-result{
+      background:rgba(255,77,122,.12);
+      border:1px solid rgba(255,77,122,.35);
+      box-shadow:0 0 40px rgba(255,77,122,.18);
+    }
+
+    /* ===== MUSIK ===== */
+    .music-btn{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:999;
+      border:none;
+      border-radius:999px;
+      padding:14px 18px;
+      font-family:'Poppins',sans-serif;
+      font-weight:600;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.22);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      cursor:pointer;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      transition:.25s ease;
+    }
+
+    .music-btn:hover{
+      transform:scale(1.05);
+    }
+
+    /* ===== PARTICLE ===== */
+    .particle{
+      position:fixed;
+      pointer-events:none;
+      font-size:16px;
+      z-index:998;
+      animation:floatUp 1.2s ease-out forwards;
+      will-change:transform,opacity;
+    }
+
+    @keyframes floatUp{
+      to{
+        transform:translateY(-70px) scale(.6);
+        opacity:0;
+      }
+    }
+
+    /* ===== HUJAN HATI ===== */
+    .heart-rain{
+      position:fixed;
+      top:-20px;
+      font-size:18px;
+      pointer-events:none;
+      z-index:997;
+      animation:fall linear forwards;
+      will-change:transform,opacity;
+    }
+
+    @keyframes fall{
+      to{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+      }
+    }
+
+    /* ===== CAHAYA ===== */
+    .soft-glow{
+      animation:glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow{
+      from{box-shadow:0 0 20px rgba(255,255,255,.08);}
+      to{box-shadow:0 0 50px rgba(255,255,255,.22);}
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:480px){
+      body{
+        padding:16px 14px 120px;
+      }
+
+      .hero-card{
+        padding:34px 22px;
+      }
+
+      .card{
+        padding:22px 18px;
+        border-radius:24px;
+      }
+
+      .bubble{
+        max-width:96%;
+        font-size:14px;
+        padding:13px 14px;
+      }
+
+      .typewriter{
+        font-size:14px;
+        min-height:140px;
+      }
+
+      .music-btn{
+        right:12px;
+        bottom:12px;
+        padding:13px 16px;
+        font-size:14px;
+      }
+    }
+    /* ===== PREMIUM AMBIENT LIGHT ===== */
+.ambient-light{
+  position:fixed;
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:1;
+  background:radial-gradient(circle,
+    rgba(255,107,157,0.18) 0%,
+    rgba(255,107,157,0.10) 35%,
+    rgba(255,107,157,0.04) 55%,
+    transparent 75%);
+  filter:blur(28px);
+  transform:translate(-50%,-50%);
+  transition:opacity .3s ease;
+  opacity:.9;
+  will-change:transform;
+}
+
+@media (max-width:768px){
+  .ambient-light{
+    width:240px;
+    height:240px;
+    filter:blur(22px);
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Audio -->
+  <audio id="bgMusic" loop preload="none">
+    <source src="The Night We Met feat. Phoebe Bridgers copy.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Musik -->
+  <button class="music-btn" id="musicBtn">🎵 Putar Musik</button>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Hai, aku cuma ingin kamu membaca ini sampai selesai…</h1>
+        <p class="subtitle">
+          Tidak ada maksud untuk memaksamu kembali. Aku hanya ingin meninggalkan
+          sesuatu yang jujur, tentang perasaan yang belum sepenuhnya bisa aku
+          ucapkan ketika semuanya berakhir.
+        </p>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="card reveal">
+      <div class="countdown">
+        <div class="count-number" id="daysCount">0</div>
+        <div class="count-label">hari sejak kita berpisah</div>
+      </div>
+    </section>
+
+    <!-- KENANGAN -->
+    <section class="card reveal">
+      <div class="section-title"><span>💬</span> Kenangan yang Masih Tinggal</div>
+      <div class="chat">
+        <div class="bubble me">Masih ingat malam ketika kita berbicara sampai ketiduran?</div>
+        <div class="bubble you">Aku ingat. Waktu itu rasanya dunia cuma tentang kita berdua.</div>
+        <div class="bubble me">Lucunya, sekarang yang tersisa cuma notifikasi lama, foto-foto yang tidak pernah sempat kuhapus, dan kebiasaan kecil yang masih membuatku otomatis memikirkanmu.</div>
+      </div>
+    </section>
+
+    <!-- TYPEWRITER -->
+    <section class="card reveal">
+      <div class="section-title"><span>🕯️</span> Cerita yang Belum Selesai</div>
+      <div class="typewriter" id="typewriter"></div>
+    </section>
+
+    <!-- MENERIMA -->
+    <section class="card reveal">
+      <div class="section-title"><span>🌙</span> Belajar Menerima</div>
+      <p style="line-height:2;color:#f6e9ef;overflow-wrap:break-word;">
+        Aku pernah berpikir bahwa cinta yang besar pasti akan membuat dua orang
+        tetap bersama. Ternyata tidak selalu begitu. Kadang dua orang saling
+        mencintai, tetapi berjalan ke arah yang berbeda. Dan semakin dewasa aku
+        memahami bahwa perpisahan tidak selalu membutuhkan seorang penjahat.
+      </p>
+    </section>
+
+    <!-- TIDAK MENYALAHKAN -->
+    <section class="card reveal">
+      <div class="section-title"><span>🤍</span> Tidak Ada yang Perlu Disalahkan</div>
+      <p style="line-height:2;color:#f6e9ef;overflow-wrap:break-word;">
+        Aku tidak membencimu karena memilih pergi. Aku juga tidak ingin
+        menyalahkan diriku sendiri terus-menerus. Kita hanya dua manusia yang
+        pernah berusaha sekuat mungkin dengan cara yang kita tahu saat itu.
+      </p>
+    </section>
+
+    <!-- SURAT -->
+    <section class="card reveal">
+      <div class="section-title"><span>✉️</span> Surat yang Tidak Pernah Terkirim</div>
+
+      <div class="letter-wrapper">
+        <button class="letter-btn" id="openLetter">Buka Surat Digital</button>
+
+        <div class="letter" id="letter">
+          <div class="letter-content">
+Untukmu yang pernah menjadi rumah paling nyaman,
+
+Aku tidak tahu apakah kamu akan membaca ini sampai akhir. Tapi jika iya, ketahuilah bahwa tidak ada satu hari pun di mana aku benar-benar melupakan bagaimana caramu membuat hal-hal sederhana terasa istimewa.
+
+Aku merindukan versi diriku ketika masih bisa membuatmu tertawa. Aku merindukan percakapan kecil yang dulu terasa tidak penting, tetapi sekarang justru menjadi kenangan yang paling sering muncul di kepala.
+
+Kalau suatu hari nanti kamu menemukan seseorang yang bisa menjagamu lebih baik, aku berharap kamu tidak ragu untuk bahagia bersamanya. Cinta yang tulus tidak selalu meminta untuk dimiliki. Kadang ia hanya ingin melihat orang yang dicintainya baik-baik saja, meskipun dari jauh.
+
+Dan jika takdir memang memisahkan kita untuk selamanya, aku ingin kamu tahu satu hal: aku bersyukur pernah bertemu denganmu.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HARAPAN -->
+    <section class="card reveal">
+      <div class="section-title"><span>🌤️</span> Harapan Terakhir</div>
+      <p style="line-height:2;color:#f6e9ef;overflow-wrap:break-word;">
+        Aku berharap kamu tidur lebih nyenyak sekarang. Aku berharap kamu tidak
+        lagi menangis diam-diam. Dan aku berharap suatu hari nanti, ketika nama
+        kita disebut dalam kenangan masing-masing, yang tersisa bukan luka,
+        melainkan rasa terima kasih karena pernah saling mencintai dengan sungguh-sungguh.
+      </p>
+    </section>
+
+    <!-- ENDING -->
+    <section class="card reveal ending">
+      <h2>Mungkin kita tidak ditakdirkan untuk bersama selamanya.</h2>
+      <p>
+        Tapi terima kasih, karena pernah menjadi bagian paling indah dalam hidupku.
+      </p>
+
+      <div class="buttons">
+        <button class="action-btn heal" id="healBtn">Aku Sudah Ikhlas 🤍</button>
+        <button class="action-btn love" id="loveBtn">Aku Masih Menyayangimu 💔</button>
+      </div>
+
+      <div class="result heal-result" id="healResult">
+        <h3>🤍 Terima kasih sudah berani melepaskan</h3>
+        <p style="margin-top:10px;">
+          Mengikhlaskan bukan berarti melupakan. Itu berarti kamu memilih untuk
+          tidak lagi menyakiti dirimu sendiri karena sesuatu yang tidak bisa
+          dipaksa kembali. Semoga setelah ini hatimu pelan-pelan pulih, dan suatu
+          hari nanti kamu menemukan cinta yang tidak membuatmu takut kehilangan.
+        </p>
+      </div>
+
+      <div class="result love-result" id="loveResult">
+        <h3>💔 Aku tahu rasanya masih mencintai seseorang yang sudah tidak bersamamu</h3>
+        <p style="margin-top:10px;">
+          Yang paling menyakitkan bukan hanya kepergiannya, tetapi kenyataan bahwa
+          kamu masih ingin menceritakan harimu kepadanya. Tidak apa-apa jika hari
+          ini kamu belum bisa ikhlas. Beberapa perasaan memang tidak hilang dalam
+          semalam. Yang penting, jangan berhenti mencintai dirimu sendiri di
+          tengah semua kehilangan ini.
+        </p>
+      </div>
+    </section>
+
+  </main>
+  <div class="ambient-light" id="ambientLight"></div>
+  
+
+  <script>
+    /* =========================
+       BINTANG BERKEDIP
+    ========================== */
+    const starsContainer = document.getElementById('stars');
+
+    for(let i=0;i<90;i++){
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.left = Math.random()*100 + '%';
+      s.style.top = Math.random()*100 + '%';
+      s.style.animationDelay = Math.random()*3 + 's';
+      s.style.animationDuration = (2 + Math.random()*3) + 's';
+      starsContainer.appendChild(s);
+    }
+
+    /* =========================
+       COUNTDOWN PUTUS
+       Ganti tanggal di bawah
+    ========================== */
+    const breakupDate = new Date('2026-06-03');
+    const today = new Date();
+    const diffTime = Math.abs(today - breakupDate);
+    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    document.getElementById('daysCount').textContent = days;
+
+    /* =========================
+       REVEAL ON SCROLL
+    ========================== */
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+        }
+      });
+    },{threshold:0.12});
+
+    reveals.forEach(el=>observer.observe(el));
+
+    /* =========================
+       TYPEWRITER
+    ========================== */
+    const text = `Aku sempat marah pada keadaan.
+
+Kenapa dua orang yang pernah begitu dekat bisa menjadi asing hanya dalam hitungan waktu?
+
+Lalu aku sadar, cinta tidak selalu berakhir karena kurangnya rasa. Kadang ia berakhir karena waktu yang tidak berpihak, karena luka yang tidak sempat disembuhkan, atau karena kita bertumbuh menjadi versi diri yang berbeda.
+
+Dan meskipun aku masih menyimpan rindu, aku tidak ingin menahanmu di tempat yang sudah tidak membuatmu bahagia.`;
+
+    const target = document.getElementById('typewriter');
+    let i = 0;
+
+    function type(){
+      if(i < text.length){
+        target.innerHTML = text.substring(0,i+1) + '<span class="cursor"></span>';
+        i++;
+        setTimeout(type, 32);
+      }else{
+        target.innerHTML = text;
+      }
+    }
+
+    setTimeout(type, 1200);
+
+    /* =========================
+       SURAT DIGITAL
+    ========================== */
+    const openBtn = document.getElementById('openLetter');
+    const letter = document.getElementById('letter');
+
+    openBtn.addEventListener('click', ()=>{
+      letter.classList.toggle('open');
+      openBtn.textContent = letter.classList.contains('open')
+        ? 'Tutup Surat'
+        : 'Buka Surat Digital';
+    });
+
+    /* =========================
+       AUDIO PLAYER
+    ========================== */
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let playing = false;
+
+    musicBtn.addEventListener('click', async ()=>{
+      try{
+        if(!playing){
+          await music.play();
+          playing = true;
+          musicBtn.textContent = '⏸️ Pause Musik';
+        }else{
+          music.pause();
+          playing = false;
+          musicBtn.textContent = '🎵 Putar Musik';
+        }
+      }catch(e){
+        alert('Letakkan file bernama music.mp3 di folder yang sama dengan index.html');
+      }
+    });
+
+    /* =========================
+       LOVE PARTICLE (RINGAN)
+    ========================== */
+    let lastParticle = 0;
+
+    document.addEventListener('pointermove', (e)=>{
+      const now = Date.now();
+      if(now - lastParticle < 80) return;
+      lastParticle = now;
+
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.textContent = '❤';
+      p.style.left = e.clientX + 'px';
+      p.style.top = e.clientY + 'px';
+      p.style.color = Math.random() > 0.5 ? '#ff7aa8' : '#ffd6e3';
+
+      document.body.appendChild(p);
+
+      setTimeout(()=>p.remove(), 1300);
+    });
+
+    /* =========================
+       HUJAN HATI
+    ========================== */
+    function createHeartRain(color='pink', amount=28){
+      const hearts = color === 'white'
+        ? ['🤍','🤍','✨']
+        : ['💖','💗','💕','💔'];
+
+      for(let i=0;i<amount;i++){
+        const h = document.createElement('div');
+        h.className = 'heart-rain';
+        h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+        h.style.left = Math.random()*100 + 'vw';
+        h.style.animationDuration = (3.5 + Math.random()*2.5) + 's';
+        h.style.fontSize = (16 + Math.random()*16) + 'px';
+
+        if(color === 'white'){
+          h.style.filter = 'drop-shadow(0 0 8px rgba(255,255,255,.8))';
+        }
+
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(), 6500);
+      }
+    }
+
+    /* =========================
+       TOMBOL AKHIR
+    ========================== */
+    const healBtn = document.getElementById('healBtn');
+    const loveBtn = document.getElementById('loveBtn');
+    const healResult = document.getElementById('healResult');
+    const loveResult = document.getElementById('loveResult');
+
+    healBtn.addEventListener('click', ()=>{
+      loveResult.classList.remove('show');
+      healResult.classList.add('show');
+      healResult.classList.add('soft-glow');
+
+      createHeartRain('white', 36);
+
+      healResult.scrollIntoView({
+        behavior:'smooth',
+        block:'center'
+      });
+    });
+
+    loveBtn.addEventListener('click', ()=>{
+      healResult.classList.remove('show');
+      loveResult.classList.add('show');
+
+      createHeartRain('pink', 42);
+
+      loveResult.scrollIntoView({
+        behavior:'smooth',
+        block:'center'
+      });
+    });
+    /* =========================
+   PREMIUM AMBIENT LIGHT
+========================= */
+const ambient = document.getElementById('ambientLight');
+
+let ambientX = window.innerWidth / 2;
+let ambientY = window.innerHeight / 2;
+
+document.addEventListener('pointermove', (e) => {
+  ambientX = e.clientX;
+  ambientY = e.clientY;
+
+  ambient.style.transform =
+    `translate(${ambientX - ambient.offsetWidth/2}px,
+               ${ambientY - ambient.offsetHeight/2}px)`;
+});
+
+// Posisi awal di tengah layar
+ambient.style.transform =
+  `translate(${ambientX - 160}px, ${ambientY - 160}px)`;
+  </script>
+</body>
+</html>
